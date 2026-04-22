@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
+const START_OFFSET_SECONDS = 10
+
 function AudioControl() {
   const audioRef = useRef(null)
   const [isMuted, setIsMuted] = useState(false)
@@ -11,6 +13,7 @@ function AudioControl() {
     audio.volume = 0.55
     audio.muted = false
     setIsMuted(false)
+    audio.currentTime = START_OFFSET_SECONDS
 
     const tryPlay = () => {
       audio.play().catch(() => {})
@@ -30,9 +33,25 @@ function AudioControl() {
     window.addEventListener('pointerdown', resumeOnInteraction, { once: true })
     window.addEventListener('keydown', resumeOnInteraction, { once: true })
 
+    const keepOffsetOnLoaded = () => {
+      if (audio.currentTime < START_OFFSET_SECONDS) {
+        audio.currentTime = START_OFFSET_SECONDS
+      }
+    }
+
+    const restartFromOffset = () => {
+      audio.currentTime = START_OFFSET_SECONDS
+      audio.play().catch(() => {})
+    }
+
+    audio.addEventListener('loadedmetadata', keepOffsetOnLoaded)
+    audio.addEventListener('ended', restartFromOffset)
+
     return () => {
       window.removeEventListener('pointerdown', resumeOnInteraction)
       window.removeEventListener('keydown', resumeOnInteraction)
+      audio.removeEventListener('loadedmetadata', keepOffsetOnLoaded)
+      audio.removeEventListener('ended', restartFromOffset)
     }
   }, [])
 
@@ -51,7 +70,7 @@ function AudioControl() {
 
   return (
     <>
-      <audio ref={audioRef} autoPlay loop preload="auto" playsInline src="/music/ordinary.mp3" />
+      <audio ref={audioRef} autoPlay preload="auto" playsInline src="/music/ordinary.mp3" />
       <button
         type="button"
         aria-label={isMuted ? 'Unmute music' : 'Mute music'}
