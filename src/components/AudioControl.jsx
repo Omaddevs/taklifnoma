@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-const START_OFFSET_SECONDS = 10
+const START_OFFSET_SECONDS = 5
 
 function AudioControl() {
   const audioRef = useRef(null)
