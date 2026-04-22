@@ -4,7 +4,20 @@ import ribbonB from '../images/ribbon-b.png'
 import { motion } from 'framer-motion'
 import RevealSection from './RevealSection'
 
-function Hero() {
+const copy = {
+  uz: {
+    titleTop: "AZIZ OILA A'ZOLARI VA QADRLI DO'STLAR",
+    body: "Sizni hayotimizdagi eng baxtli va unutilmas kunlardan biri - to'y tantanamizga chin dildan taklif qilamiz.",
+  },
+  ru: {
+    titleTop: 'ДОРОГИЕ РОДНЫЕ И БЛИЗКИЕ',
+    body: 'С радостью и волнением мы приглашаем вас разделить с нами один из самых значимых дней нашей жизни - день нашей свадьбы.',
+  },
+}
+
+function Hero({ locale = 'uz' }) {
+  const t = copy[locale] ?? copy.uz
+
   return (
     <RevealSection className="relative overflow-hidden px-6 pb-10 pt-8 text-center">
       <img
@@ -35,12 +48,9 @@ function Hero() {
         <span className="mx-2 block text-[42px] italic">&</span>
         Zuxra
       </motion.h1>
-      <p className="mx-auto mt-6 max-w-[290px] text-sm leading-relaxed text-[#f7dfe5]">
-        AZIZ OILA A'ZOLARI VA QADRLI DO'STLAR
-      </p>
+      <p className="mx-auto mt-6 max-w-[290px] text-sm leading-relaxed text-[#f7dfe5]">{t.titleTop}</p>
       <p className="mx-auto mt-4 max-w-[300px] text-xs leading-relaxed text-[#e9d3da]">
-        Sizni hayotimizdagi eng baxtli va unutilmas kunlardan biri - to'y
-        tantanamizga chin dildan taklif qilamiz.
+        {t.body}
       </p>
       <p className="mt-8 font-['Playfair_Display'] text-4xl text-white">
         08.08.2026

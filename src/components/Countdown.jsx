@@ -2,6 +2,18 @@ import { useEffect, useMemo, useState } from 'react'
 import RevealSection from './RevealSection'
 
 const EVENT_DATE = '2026-08-08T18:00:00'
+const labels = {
+  uz: {
+    title: "To'ygacha qolgan vaqt",
+    done: "Bugun to'y kuni. Xush kelibsiz!",
+    units: ['kun', 'soat', 'daqiqa', 'sekund'],
+  },
+  ru: {
+    title: 'До свадьбы осталось',
+    done: 'Сегодня день свадьбы. Добро пожаловать!',
+    units: ['дней', 'часов', 'минут', 'секунд'],
+  },
+}
 
 function getTimeLeft() {
   const target = new Date(EVENT_DATE).getTime()
@@ -16,7 +28,8 @@ function getTimeLeft() {
   return { days, hours, minutes, seconds, isFinished: diff === 0 }
 }
 
-function Countdown() {
+function Countdown({ locale = 'uz' }) {
+  const t = labels[locale] ?? labels.uz
   const [timeLeft, setTimeLeft] = useState(getTimeLeft())
 
   useEffect(() => {
@@ -26,21 +39,19 @@ function Countdown() {
 
   const countdownItems = useMemo(
     () => [
-      ['kun', timeLeft.days],
-      ['soat', timeLeft.hours],
-      ['daqiqa', timeLeft.minutes],
-      ['sekund', timeLeft.seconds],
+      [t.units[0], timeLeft.days],
+      [t.units[1], timeLeft.hours],
+      [t.units[2], timeLeft.minutes],
+      [t.units[3], timeLeft.seconds],
     ],
-    [timeLeft.days, timeLeft.hours, timeLeft.minutes, timeLeft.seconds],
+    [timeLeft.days, timeLeft.hours, timeLeft.minutes, timeLeft.seconds, t.units],
   )
 
   return (
     <RevealSection className="px-6 pb-12 pt-2 text-center">
-      <h2 className="font-['Playfair_Display'] text-[28px] text-[#f4d8de]">
-        To'ygacha qolgan vaqt
-      </h2>
+      <h2 className="font-['Playfair_Display'] text-[28px] text-[#f4d8de]">{t.title}</h2>
       {timeLeft.isFinished ? (
-        <p className="mt-4 text-base text-white">Bugun to'y kuni. Xush kelibsiz!</p>
+        <p className="mt-4 text-base text-white">{t.done}</p>
       ) : (
         <div className="mt-6 grid grid-cols-4 gap-3">
           {countdownItems.map(([label, value]) => (
