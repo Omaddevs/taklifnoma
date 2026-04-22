@@ -10,12 +10,30 @@ function AudioControl() {
 
     audio.volume = 0.55
     audio.muted = false
+    setIsMuted(false)
 
-    audio.play().catch(() => {
-      audio.muted = true
-      setIsMuted(true)
+    const tryPlay = () => {
       audio.play().catch(() => {})
-    })
+    }
+
+    tryPlay()
+
+    // If browser blocks autoplay with sound, retry on first interaction.
+    const resumeOnInteraction = () => {
+      if (!audio.muted) {
+        tryPlay()
+      }
+      window.removeEventListener('pointerdown', resumeOnInteraction)
+      window.removeEventListener('keydown', resumeOnInteraction)
+    }
+
+    window.addEventListener('pointerdown', resumeOnInteraction, { once: true })
+    window.addEventListener('keydown', resumeOnInteraction, { once: true })
+
+    return () => {
+      window.removeEventListener('pointerdown', resumeOnInteraction)
+      window.removeEventListener('keydown', resumeOnInteraction)
+    }
   }, [])
 
   const toggleMute = () => {
@@ -33,7 +51,7 @@ function AudioControl() {
 
   return (
     <>
-      <audio ref={audioRef} loop preload="auto" src="/music/ordinary.mp3" />
+      <audio ref={audioRef} autoPlay loop preload="auto" playsInline src="/music/ordinary.mp3" />
       <button
         type="button"
         aria-label={isMuted ? 'Unmute music' : 'Mute music'}
