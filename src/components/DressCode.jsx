@@ -82,11 +82,11 @@ function DressCode({ locale = 'uz' }) {
                 day === null
                   ? ''
                   : day === 8
-                    ? "bg-[#d58c9a] font-semibold text-white shadow-[0_6px_14px_rgba(213,140,154,0.42)]"
+                    ? 'border-2 border-[#d58c9a] bg-[#f8e6ea] font-semibold text-[#b45f72] shadow-[0_6px_14px_rgba(213,140,154,0.28)]'
                     : 'text-[#2f3b5c]'
               }`}
             >
-              {day === 8 ? '8 ❤' : day ?? ''}
+              {day ?? ''}
             </span>
           ))}
         </div>
