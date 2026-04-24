@@ -34,7 +34,7 @@ function GiftCard({ locale = 'uz' }) {
   }
 
   return (
-    <RevealSection className="px-6 pb-10 pt-2">
+    <RevealSection className="px-6 pb-4 pt-[52px]">
       <div className="rounded-3xl border border-[#f0d7df]/35 bg-gradient-to-br from-[#44517b] to-[#2f3b5c] p-5 shadow-xl">
         <p className="text-center font-['Playfair_Display'] text-2xl text-[#f3dde5]">
           {t.title}

@@ -12,16 +12,18 @@ function App() {
   const [locale, setLocale] = useState('uz')
 
   return (
-    <main className="mx-auto min-h-screen max-w-[390px] bg-[#2f3b5c] text-white shadow-2xl">
-      <AudioControl locale={locale} />
-      <LanguageSwitch locale={locale} onChange={setLocale} />
-      <Hero locale={locale} />
-      <Countdown locale={locale} />
-      <Location locale={locale} />
-      <DressCode locale={locale} />
-      <GiftCard locale={locale} />
-      <Wishes locale={locale} />
-    </main>
+    <div className="mx-auto max-w-[390px]">
+      <main className="min-h-screen bg-[#2f3b5c] text-white shadow-2xl">
+        <AudioControl locale={locale} />
+        <LanguageSwitch locale={locale} onChange={setLocale} />
+        <Hero locale={locale} />
+        <Countdown locale={locale} />
+        <Location locale={locale} />
+        <DressCode locale={locale} />
+        <GiftCard locale={locale} />
+        <Wishes locale={locale} />
+      </main>
+    </div>
   )
 }
 

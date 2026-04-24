@@ -1,17 +1,14 @@
 import RevealSection from './RevealSection'
 import ribbonA from '../images/ribbon-a.png'
 import ribbonB from '../images/ribbon-b.png'
+import footerImage from '../images/footer.jpg'
 
 const copy = {
   uz: {
-    title: 'Tilaklarimiz',
-    p1: "Sovg'a ustida uzoq o'ylamang. Ezgu tilaklaringiz va konvertdagi e'tiboringiz bizning yangi oilaviy orzularimizga qanot bo'ladi.",
-    p2: "Jonli gullar o'rniga oilaviy kolleksiyamiz uchun bir shisha ichimlik olib kelsangiz, bundan xursand bo'lamiz.",
+    title: '',
   },
   ru: {
-    title: 'Наши пожелания',
-    p1: 'Не ломайте голову над подарком. Ваши пожелания в конвертах помогут осуществить нашу заветную мечту.',
-    p2: 'Вместо живых цветов лучшей альтернативой может стать бутылка вина для нашего семейного бара.',
+    title: '',
   },
 }
 
@@ -30,12 +27,9 @@ function Wishes({ locale = 'uz' }) {
         className="float-soft pointer-events-none absolute bottom-0 right-[-30px] w-28 scale-x-[-1] opacity-90"
       />
       <h2 className="font-['Playfair_Display'] text-3xl text-[#f5dde4]">{t.title}</h2>
-      <p className="mx-auto mt-7 max-w-[300px] text-sm leading-relaxed text-[#f2d9df]">
-        {t.p1}
-      </p>
-      <p className="mx-auto mt-5 max-w-[300px] text-sm leading-relaxed text-[#f2d9df]">
-        {t.p2}
-      </p>
+      <div className="mx-auto mt-8 w-full max-w-[320px] overflow-hidden rounded-2xl border border-[#f5dde4]/25 bg-[#39466d]/45 p-2">
+        <img src={footerImage} alt="Wedding wishes footer" className="w-full rounded-xl object-cover" />
+      </div>
     </RevealSection>
   )
 }
