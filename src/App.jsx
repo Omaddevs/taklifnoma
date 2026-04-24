@@ -13,7 +13,7 @@ function App() {
 
   return (
     <main className="mx-auto min-h-screen max-w-[390px] bg-[#2f3b5c] text-white shadow-2xl">
-      <AudioControl />
+      <AudioControl locale={locale} />
       <LanguageSwitch locale={locale} onChange={setLocale} />
       <Hero locale={locale} />
       <Countdown locale={locale} />

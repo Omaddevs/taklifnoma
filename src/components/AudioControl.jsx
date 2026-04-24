@@ -1,57 +1,90 @@
 import { useEffect, useRef, useState } from 'react'
+import weddingTrack from '../../music/Alex Warren - Ordinary (Official Video).mp3'
 
 const START_OFFSET_SECONDS = 5
 
 function AudioControl() {
   const audioRef = useRef(null)
-  const [isMuted, setIsMuted] = useState(false)
+  const userMutedRef = useRef(false)
+  const [isUserMuted, setIsUserMuted] = useState(false)
 
   useEffect(() => {
     const audio = audioRef.current
     if (!audio) return
 
     audio.volume = 0.55
+    audio.defaultMuted = false
     audio.muted = false
-    setIsMuted(false)
-    audio.currentTime = START_OFFSET_SECONDS
+    userMutedRef.current = false
+    setIsUserMuted(false)
 
-    const tryPlay = () => {
-      audio.play().catch(() => {})
-    }
-
-    tryPlay()
-
-    // If browser blocks autoplay with sound, retry on first interaction.
-    const resumeOnInteraction = () => {
-      if (!audio.muted) {
-        tryPlay()
+    const playMutedFallback = async () => {
+      audio.muted = true
+      try {
+        await audio.play()
+      } catch {
+        // If still blocked, we retry on first interaction.
       }
-      window.removeEventListener('pointerdown', resumeOnInteraction)
-      window.removeEventListener('keydown', resumeOnInteraction)
     }
 
-    window.addEventListener('pointerdown', resumeOnInteraction, { once: true })
-    window.addEventListener('keydown', resumeOnInteraction, { once: true })
+    const startPlayback = async () => {
+      try {
+        await audio.play()
+      } catch (error) {
+        // Only fallback to muted when autoplay-with-sound is explicitly blocked.
+        if (error?.name === 'NotAllowedError') {
+          await playMutedFallback()
+          return
+        }
+        // Retry once media is ready; avoids false muted state during early load.
+        const retryAfterReady = async () => {
+          audio.removeEventListener('canplay', retryAfterReady)
+          try {
+            audio.muted = false
+            await audio.play()
+          } catch {}
+        }
+        audio.addEventListener('canplay', retryAfterReady, { once: true })
+      }
+    }
 
-    const keepOffsetOnLoaded = () => {
-      if (audio.currentTime < START_OFFSET_SECONDS) {
+    const setStartOffset = () => {
+      if (audio.duration && audio.currentTime < START_OFFSET_SECONDS) {
         audio.currentTime = START_OFFSET_SECONDS
       }
     }
 
-    const restartFromOffset = () => {
-      audio.currentTime = START_OFFSET_SECONDS
-      audio.play().catch(() => {})
+    const unmuteAndPlay = async () => {
+      if (userMutedRef.current) return
+      audio.muted = false
+      try {
+        await audio.play()
+        window.removeEventListener('pointerdown', unmuteAndPlay)
+        window.removeEventListener('keydown', unmuteAndPlay)
+        window.removeEventListener('touchstart', unmuteAndPlay)
+        window.removeEventListener('pageshow', unmuteAndPlay)
+      } catch {
+        // Keep trying later; do not force muted icon unless user muted.
+        audio.muted = true
+      }
     }
 
-    audio.addEventListener('loadedmetadata', keepOffsetOnLoaded)
-    audio.addEventListener('ended', restartFromOffset)
+    startPlayback()
+
+    audio.addEventListener('loadedmetadata', setStartOffset)
+
+    // Autoplay with sound is commonly blocked; unlock on first gesture.
+    window.addEventListener('pointerdown', unmuteAndPlay)
+    window.addEventListener('keydown', unmuteAndPlay)
+    window.addEventListener('touchstart', unmuteAndPlay)
+    window.addEventListener('pageshow', unmuteAndPlay)
 
     return () => {
-      window.removeEventListener('pointerdown', resumeOnInteraction)
-      window.removeEventListener('keydown', resumeOnInteraction)
-      audio.removeEventListener('loadedmetadata', keepOffsetOnLoaded)
-      audio.removeEventListener('ended', restartFromOffset)
+      window.removeEventListener('pointerdown', unmuteAndPlay)
+      window.removeEventListener('keydown', unmuteAndPlay)
+      window.removeEventListener('touchstart', unmuteAndPlay)
+      window.removeEventListener('pageshow', unmuteAndPlay)
+      audio.removeEventListener('loadedmetadata', setStartOffset)
     }
   }, [])
 
@@ -59,26 +92,27 @@ function AudioControl() {
     const audio = audioRef.current
     if (!audio) return
 
-    const nextMuted = !audio.muted
-    audio.muted = nextMuted
-    setIsMuted(nextMuted)
+    const nextUserMuted = !isUserMuted
+    userMutedRef.current = nextUserMuted
+    setIsUserMuted(nextUserMuted)
+    audio.muted = nextUserMuted
 
-    if (audio.paused) {
+    if (!nextUserMuted && audio.paused) {
       audio.play().catch(() => {})
     }
   }
 
   return (
     <>
-      <audio ref={audioRef} autoPlay preload="auto" playsInline src="/music/ordinary.mp3" />
+      <audio ref={audioRef} autoPlay preload="auto" playsInline loop src={weddingTrack} />
       <button
         type="button"
-        aria-label={isMuted ? 'Unmute music' : 'Mute music'}
+        aria-label={isUserMuted ? 'Unmute music' : 'Mute music'}
         onClick={toggleMute}
         className="fixed right-4 top-4 z-50 flex h-[56px] w-[56px] items-center justify-center rounded-full border-[3px] border-[#f3d7df] bg-gradient-to-b from-[#44527b] to-[#2f3b5c] shadow-[0_8px_20px_rgba(0,0,0,0.24)] transition-transform hover:scale-[1.03]"
       >
         <span className="flex h-[44px] w-[44px] items-center justify-center rounded-full border border-[#f3d7df]/55 bg-[#36446b] text-[#f7dfe5]">
-          {isMuted ? (
+          {isUserMuted ? (
             <svg
               viewBox="0 0 24 24"
               className="h-5 w-5"

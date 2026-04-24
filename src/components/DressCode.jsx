@@ -1,16 +1,56 @@
 import RevealSection from './RevealSection'
-import venueImage from '../images/venue.jpg'
 import ribbonC from '../images/ribbon-c.png'
 
-const colors = ['#d58c9a', '#e7c1c7', '#f5f5f5', '#2f3b5c']
+const WEEKDAYS = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']
+const CALENDAR_DAYS = [
+  null,
+  null,
+  null,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30,
+  31,
+]
+
 const copy = {
   uz: {
-    title: 'Dress code',
-    body: "To'yimiz nafis va uyg'un ruhda o'tishi uchun ushbu rang palitrasiga mos libos tanlasangiz, juda minnatdor bo'lamiz.",
+    title: "To'y taqvimi",
+    body: "Quvonchli kunimizni taqvimda belgilab qo'ying.",
+    month: 'Avgust 2026',
+    note: "8-avgust - to'y kuni",
   },
   ru: {
-    title: 'Дресс-код',
-    body: 'Мы очень старались сделать нашу свадьбу красивой и будем вам благодарны, если поддержите нашу цветовую палитру и придете в нарядах этих тонов.',
+    title: 'Свадебный календарь',
+    body: 'Отметьте эту дату в своем календаре.',
+    month: 'Август 2026',
+    note: '8 августа - день свадьбы',
   },
 }
 
@@ -27,21 +67,30 @@ function DressCode({ locale = 'uz' }) {
       <p className="mx-auto mt-5 max-w-[290px] text-sm leading-relaxed">
         {t.body}
       </p>
-      <div className="mt-8 flex items-center justify-center gap-3">
-        {colors.map((color) => (
-          <span
-            key={color}
-            className="h-10 w-10 rounded-full border border-[#2f3b5c]/20"
-            style={{ backgroundColor: color }}
-          />
-        ))}
-      </div>
-      <div className="mx-auto mt-8 h-36 w-full max-w-[292px] overflow-hidden rounded-sm">
-        <img
-          src={venueImage}
-          alt="Table decoration"
-          className="h-full w-full object-cover"
-        />
+      <div className="mx-auto mt-8 w-full max-w-[320px] rounded-3xl border border-[#2f3b5c]/15 bg-white/35 p-4 shadow-[0_10px_24px_rgba(47,59,92,0.12)] backdrop-blur-[1px]">
+        <p className="text-center font-['Playfair_Display'] text-2xl text-[#2f3b5c]">{t.month}</p>
+        <div className="mt-4 grid grid-cols-7 gap-1 text-center">
+          {WEEKDAYS.map((day) => (
+            <span key={day} className="text-[11px] font-semibold uppercase tracking-wide text-[#2f3b5c]/70">
+              {day}
+            </span>
+          ))}
+          {CALENDAR_DAYS.map((day, idx) => (
+            <span
+              key={day ?? `empty-${idx}`}
+              className={`flex h-9 items-center justify-center rounded-full text-sm ${
+                day === null
+                  ? ''
+                  : day === 8
+                    ? "bg-[#d58c9a] font-semibold text-white shadow-[0_6px_14px_rgba(213,140,154,0.42)]"
+                    : 'text-[#2f3b5c]'
+              }`}
+            >
+              {day === 8 ? '8 ❤' : day ?? ''}
+            </span>
+          ))}
+        </div>
+        <p className="mt-4 text-center text-sm text-[#2f3b5c]">{t.note}</p>
       </div>
     </RevealSection>
   )
