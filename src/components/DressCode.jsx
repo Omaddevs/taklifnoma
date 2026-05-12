@@ -2,10 +2,8 @@ import RevealSection from './RevealSection'
 import ribbonC from '../images/ribbon-c.png'
 
 const WEEKDAYS = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']
+// June 2026 starts on Monday (Mo Tu We Th Fr Sa Su grid).
 const CALENDAR_DAYS = [
-  null,
-  null,
-  null,
   1,
   2,
   3,
@@ -36,21 +34,20 @@ const CALENDAR_DAYS = [
   28,
   29,
   30,
-  31,
 ]
 
 const copy = {
   uz: {
     title: "To'y taqvimi",
     body: "Quvonchli kunimizni taqvimda belgilab qo'ying.",
-    month: 'Avgust 2026',
-    note: "8-avgust - to'y kuni",
+    month: 'Iyun 2026',
+    note: "6-iyun - to'y kuni",
   },
   ru: {
     title: 'Свадебный календарь',
     body: 'Отметьте эту дату в своем календаре.',
-    month: 'Август 2026',
-    note: '8 августа - день свадьбы',
+    month: 'Июнь 2026',
+    note: '6 июня - день свадьбы',
   },
 }
 
@@ -81,7 +78,7 @@ function DressCode({ locale = 'uz' }) {
               className={`flex h-9 items-center justify-center rounded-full text-sm ${
                 day === null
                   ? ''
-                  : day === 8
+                  : day === 6
                     ? 'border-2 border-[#d58c9a] bg-[#f8e6ea] font-semibold text-[#b45f72] shadow-[0_6px_14px_rgba(213,140,154,0.28)]'
                     : 'text-[#2f3b5c]'
               }`}

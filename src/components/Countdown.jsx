@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import RevealSection from './RevealSection'
 
-const EVENT_DATE = '2026-08-08T18:00:00'
+const EVENT_DATE = '2026-06-06T11:00:00'
 const labels = {
   uz: {
     title: "To'ygacha qolgan vaqt",

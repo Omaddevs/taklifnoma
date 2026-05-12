@@ -33,7 +33,7 @@ function Hero({ locale = 'uz' }) {
       <div className="mx-auto w-full max-w-[280px] rounded-t-[140px] border border-white/20 p-2">
         <img
           src={coupleImage}
-          alt="Anton and Alina"
+          alt="Dilmurod va Munavvar"
           className="h-[320px] w-full rounded-t-[130px] object-cover object-top"
         />
       </div>
@@ -44,17 +44,16 @@ function Hero({ locale = 'uz' }) {
         transition={{ delay: 0.2, duration: 0.85, ease: 'easeOut' }}
         className="glow-soft mt-7 bg-gradient-to-b from-white to-[#f3d8e2] bg-clip-text font-['Playfair_Display'] text-[64px] leading-[0.85] tracking-tight text-transparent"
       >
-        Toxir
+        Dilmurod
         <span className="mx-2 block text-[42px] italic">&</span>
-        Zuxra
+        Munavvar
       </motion.h1>
       <p className="mx-auto mt-6 max-w-[290px] text-sm leading-relaxed text-[#f7dfe5]">{t.titleTop}</p>
       <p className="mx-auto mt-4 max-w-[300px] text-xs leading-relaxed text-[#e9d3da]">
         {t.body}
       </p>
-      <p className="mt-8 font-['Playfair_Display'] text-4xl text-white">
-        08.08.2026
-      </p>
+      <p className="mt-8 font-['Playfair_Display'] text-4xl text-white">06.06.2026</p>
+      <p className="mt-3 font-['Playfair_Display'] text-2xl text-[#f7dfe5]">11:00</p>
     </RevealSection>
   )
 }

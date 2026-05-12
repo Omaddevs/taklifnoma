@@ -20,7 +20,9 @@ function App() {
         <Countdown locale={locale} />
         <Location locale={locale} />
         <DressCode locale={locale} />
-        <GiftCard locale={locale} />
+        <div className="hidden">
+          <GiftCard locale={locale} />
+        </div>
         <Wishes locale={locale} />
       </main>
     </div>

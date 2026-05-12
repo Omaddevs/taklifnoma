@@ -6,21 +6,22 @@ import RevealSection from './RevealSection'
 const copy = {
   uz: {
     title: "To'y manzili",
-    place: 'Royal Hall maskani',
-    addr: "Ulubishe qishlog'i, Peski ko'chasi, 2A",
+    place: "Diyor to'yxonasi",
+    addr: "Oromgoh go'zal yo'nalishi",
     btn: 'Lokatsiyani ochish',
   },
   ru: {
     title: 'Место проведения',
-    place: 'Усадьба Royal Hall',
-    addr: 'д. Улубище, Пески ул, 2A',
+    place: 'Свадебный зал «Дийор»',
+    addr: 'Направление «Оромгох — красивый»',
     btn: 'Открыть локацию',
   },
 }
 
 function Location({ locale = 'uz' }) {
   const t = copy[locale] ?? copy.uz
-  const mapUrl = 'https://maps.google.com/?q=Royal+Hall+Ulubishe'
+  const mapUrl =
+    'https://maps.google.com/maps?q=41.019886,71.632615&ll=41.019886,71.632615&z=16'
 
   return (
     <RevealSection className="brush-top brush-bottom relative bg-[#f4d8de] px-6 py-14 text-center text-[#2f3b5c]">
