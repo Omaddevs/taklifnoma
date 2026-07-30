@@ -81,6 +81,7 @@ function Hero({ locale = 'uz' }) {
       <p className="mx-auto mt-3 max-w-[300px] text-xs leading-relaxed text-[#e9d3da]">{t.body2}</p>
 
       <p className="mt-8 font-['Playfair_Display'] text-4xl text-white">06.08.2026</p>
+      <p className="mt-2 text-xs uppercase tracking-[0.35em] text-[#e9d3da]">13:00</p>
     </RevealSection>
   )
 }
