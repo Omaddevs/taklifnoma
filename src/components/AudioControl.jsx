@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import weddingTrack from '../../music/wedding-nasheed.mp3'
+import weddingTrack from '../../music/Alex Warren - Ordinary (Official Video).mp3'
 import ribbonA from '../images/ribbon-a.png'
 import ribbonB from '../images/ribbon-b.png'
 import ribbonC from '../images/ribbon-c.png'
