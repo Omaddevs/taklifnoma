@@ -7,12 +7,12 @@ import ribbonC from '../images/ribbon-c.png'
 
 const copy = {
   uz: {
-    names: 'Omadbek & Diyora',
+    names: 'Rahimjon & Asima',
     subtitle: 'Nikoh to\'y taklifnomasi',
     button: 'Taklifnomani ochish',
   },
   ru: {
-    names: 'Omadbek & Diyora',
+    names: 'Rahimjon & Asima',
     subtitle: 'Свадебное приглашение',
     button: 'Открыть приглашение',
   },
@@ -141,11 +141,11 @@ function AudioControl({ locale = 'uz' }) {
                   className="glow-soft mt-6 overflow-visible px-1 py-2 font-['Playfair_Display'] text-[46px] leading-[1.2] tracking-normal"
                 >
                   <span className="block bg-gradient-to-b from-white to-[#f3d8e2] bg-clip-text pb-1 text-transparent">
-                    Omadbek
+                    Rahimjon
                   </span>
                   <span className="my-1 block text-[32px] italic leading-none text-[#f3d8e2]">&</span>
                   <span className="block bg-gradient-to-b from-white to-[#f3d8e2] bg-clip-text pb-1 text-transparent">
-                    Diyora
+                    Asima
                   </span>
                 </motion.h1>
 

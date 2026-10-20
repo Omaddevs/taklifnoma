@@ -12,6 +12,7 @@ const copy = {
     verseRef: "(Qur'oni Karim, Naba surasi, 8-oyat)",
     body1:
       "Alloh taoloning marhamati, ota-onalarimizning duolari va yaqinlarimizning ezgu tilaklari ila hayotimizning eng baxtli kunlaridan biri — nikoh to'yimiz munosabati bilan Siz azizlarni samimiylik bilan taklif etamiz.",
+    times: 'ZAGS 09:00 · Bazm 14:00',
     body2:
       "Quvonchimizga sherik bo'lib, duolaringiz bilan bizni siylashingizni chin dildan so'raymiz.",
   },
@@ -22,6 +23,7 @@ const copy = {
     verseRef: '(Священный Коран, сура Ан-Наба, аят 8)',
     body1:
       'По милости Аллаха, с молитвами наших родителей и добрыми пожеланиями близких мы от всей души приглашаем вас на одно из самых счастливых событий нашей жизни — наш свадебный праздник.',
+    times: 'ЗАГС 09:00 · Банкет 14:00',
     body2:
       'Будем искренне рады, если вы разделите с нами эту радость и обратитесь к нам с добрыми молитвами.',
   },
@@ -48,7 +50,7 @@ function Hero({ locale = 'uz' }) {
       <div className="mx-auto w-full max-w-[280px] rounded-t-[140px] border border-white/20 p-2 mt-6">
         <img
           src={coupleImage}
-          alt="Omadbek va Diyora"
+          alt="Rahimjon va Asima"
           className="h-[320px] w-full rounded-t-[130px] object-cover object-top"
         />
       </div>
@@ -61,11 +63,11 @@ function Hero({ locale = 'uz' }) {
         className="glow-soft mt-7 overflow-visible px-1 py-2 font-['Playfair_Display'] text-[50px] leading-[1.2] tracking-normal"
       >
         <span className="block bg-gradient-to-b from-white to-[#f3d8e2] bg-clip-text pb-1 text-transparent">
-          Omadbek
+          Rahimjon
         </span>
         <span className="my-1 block text-[36px] italic leading-none text-[#f3d8e2]">&</span>
         <span className="block bg-gradient-to-b from-white to-[#f3d8e2] bg-clip-text pb-1 text-transparent">
-          Diyora
+          Asima
         </span>
       </motion.h1>
 
@@ -80,8 +82,8 @@ function Hero({ locale = 'uz' }) {
       <p className="mx-auto mt-5 max-w-[300px] text-xs leading-relaxed text-[#e9d3da]">{t.body1}</p>
       <p className="mx-auto mt-3 max-w-[300px] text-xs leading-relaxed text-[#e9d3da]">{t.body2}</p>
 
-      <p className="mt-8 font-['Playfair_Display'] text-4xl text-white">06.08.2026</p>
-      <p className="mt-2 text-xs uppercase tracking-[0.35em] text-[#e9d3da]">13:00</p>
+      <p className="mt-8 font-['Playfair_Display'] text-4xl text-white">05–06.11.2026</p>
+      <p className="mt-2 text-xs uppercase tracking-[0.35em] text-[#e9d3da]">{t.times}</p>
     </RevealSection>
   )
 }
